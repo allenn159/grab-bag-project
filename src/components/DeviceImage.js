@@ -14,11 +14,11 @@ const DeviceImage = ({ url, id }) => {
     <img
       ref={drag}
       style={{
-        margin: "20px",
+        margin: "10px",
         cursor: "pointer",
-        border: isDragging ? "5px red solid" : "5px blue solid",
       }}
       src={url}
+      alt="device"
     />
   );
 };
