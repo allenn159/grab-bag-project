@@ -25,12 +25,12 @@ const GrabBag = () => {
   }));
 
   const updatePage = () => {
-    setOffSet((prev) => prev + 50);
+    setOffSet((prev) => prev + 20);
   };
 
   async function getDevices() {
     const { data, headers } = await axios.get(
-      `https://www.ifixit.com/api/2.0/wikis/CATEGORY?offset=${offset}&limit=50`
+      `https://www.ifixit.com/api/2.0/wikis/CATEGORY?offset=${offset}&limit=20`
     );
     // setDevices((prev) => [...prev, ...data]);
     setDevices((prev) => [...prev, ...data]);
@@ -42,6 +42,17 @@ const GrabBag = () => {
   useEffect(() => {
     getDevices();
   }, [offset]);
+
+  useEffect(() => {
+    const data = localStorage.getItem("bagItems");
+    if (data) {
+      setBagItems(JSON.parse(data));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("bagItems", JSON.stringify(bagItems));
+  }, [bagItems]);
 
   if (!devices.length) return <p>Loading...</p>;
 
