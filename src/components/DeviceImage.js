@@ -7,7 +7,7 @@ const DeviceImage = ({ url, id }) => {
     item: { id, url },
     collect: (monitor) => ({
       // this is to keep track if an element is being dragged
-      isDragging: !!monitor.isDragging(),
+      isDragging: monitor.isDragging(),
     }),
   }));
   return (

@@ -6,9 +6,7 @@ import GrabBag from "./components/GrabBag";
 function App() {
   return (
     <DndProvider backend={HTML5Backend}>
-      <div>
-        <GrabBag />
-      </div>
+      <GrabBag />
     </DndProvider>
   );
 }
