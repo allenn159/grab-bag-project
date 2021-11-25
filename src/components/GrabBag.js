@@ -14,7 +14,7 @@ const GrabBag = () => {
     accept: "image",
     drop: (item) =>
       setBagItems((bag) =>
-        !bag.some((el) => el.id === item.id)
+        !bag.some((el) => el.id === item.id) && bag.length < 5
           ? [...bag, { id: item.id, url: item.url }]
           : bag
       ),
@@ -24,8 +24,11 @@ const GrabBag = () => {
     }),
   }));
 
-  const updatePage = () => {
-    setOffSet((prev) => prev + 20);
+  const handleUpdatePage = () => setOffSet((prev) => prev + 20);
+
+  const handleRemoveBagItem = (deviceId) => {
+    const updatedBag = bagItems.filter((bagItem) => bagItem.id !== deviceId);
+    setBagItems(updatedBag);
   };
 
   async function getDevices() {
@@ -71,11 +74,16 @@ const GrabBag = () => {
 
         <div
           ref={drop}
-          className="flex flex-col lg:flex-row flex-wrap justify-center h-64 w-11/12 mb-4 rounded-lg bg-white shadow-xl"
+          className={`flex flex-col lg:flex-row flex-wrap lg:justify-center items-center ${
+            bagItems.length === 0 ? "h-64" : "h-auto"
+          } w-11/12 mb-4 rounded-lg bg-white shadow-xl`}
         >
           {bagItems.map((device) => (
             <div className="relative" key={device.id}>
-              <button className="absolute top-5 right-4 w-8 bg-gray-200 hover:bg-red-400 transition ease-in-out delay-25 rounded-md text-3xl font-bold text-red-700">
+              <button
+                onClick={() => handleRemoveBagItem(device.id)}
+                className="absolute top-5 right-4 w-8 bg-gray-200 hover:bg-red-400 transition ease-in-out delay-25 rounded-md text-3xl font-bold text-red-700"
+              >
                 X
               </button>
               <img className="my-4 mx-3 rounded-md" src={device.url} />
@@ -86,7 +94,7 @@ const GrabBag = () => {
       <InfiniteScroll
         className="flex flex-wrap justify-center"
         dataLength={devices.length}
-        next={updatePage}
+        next={handleUpdatePage}
         hasMore={hasMore}
       >
         {devices.length &&
