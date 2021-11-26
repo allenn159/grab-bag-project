@@ -74,19 +74,19 @@ const GrabBag = () => {
 
         <div
           ref={drop}
-          className={`flex flex-col lg:flex-row flex-wrap lg:justify-center items-center ${
-            bagItems.length === 0 ? "h-64" : "h-auto"
-          } w-11/12 mb-4 rounded-lg bg-white shadow-xl`}
+          className={`whitespace-nowrap text-center ${
+            bagItems.length === 0 ? "h-60" : "h-auto"
+          } w-11/12 mb-4 rounded-lg bg-white shadow-xl overflow-x-auto`}
         >
           {bagItems.map((device) => (
-            <div className="relative" key={device.id}>
+            <div className="relative inline-block" key={device.id}>
               <button
                 onClick={() => handleRemoveBagItem(device.id)}
                 className="absolute top-5 right-4 w-8 bg-gray-200 hover:bg-red-400 transition ease-in-out delay-25 rounded-md text-3xl font-bold text-red-700"
               >
                 X
               </button>
-              <img className="my-4 mx-3 rounded-md" src={device.url} />
+              <img className="mt-2 mx-3 rounded-md" src={device.url} />
             </div>
           ))}
         </div>
