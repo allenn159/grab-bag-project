@@ -14,7 +14,7 @@ const GrabBag = () => {
     accept: "image",
     drop: (item) =>
       setBagItems((bag) =>
-        !bag.some((el) => el.id === item.id) && bag.length < 5
+        !bag.some((el) => el.id === item.id)
           ? [...bag, { id: item.id, url: item.url }]
           : bag
       ),
@@ -60,33 +60,25 @@ const GrabBag = () => {
   if (!devices.length) return <p>Loading...</p>;
 
   return (
-    // Styling is just a placeholder for now.
     <>
       <div className="flex flex-col items-center bg-blue-300 sticky top-0">
-        <p className="text-5xl font-bold my-4 font-sans">
-          Grab <span className="text-purple-700">Bag</span>
-        </p>
-        <p
-          className={`text-4xl font-bold ${
-            bagItems?.length === 5 ? "text-red-700" : "text-current"
-          }`}
-        >{`${bagItems?.length} / 5`}</p>
+        <p className="text-2xl font-bold">Items: {bagItems?.length}</p>
 
         <div
           ref={drop}
-          className={`whitespace-nowrap text-center ${
-            bagItems.length === 0 ? "h-60" : "h-auto"
-          } w-11/12 mb-4 rounded-lg bg-white shadow-xl overflow-x-auto`}
+          className={`whitespace-nowrap text-center w-11/12 h-80 mb-4 rounded-lg bg-white shadow-xl overflow-x-auto ${
+            isOver && "bg-green-300"
+          }`}
         >
           {bagItems.map((device) => (
-            <div className="relative inline-block" key={device.id}>
+            <div className="inline-block" key={device.id}>
+              <img className="mt-6 mx-3 rounded-md" src={device.url} />
               <button
                 onClick={() => handleRemoveBagItem(device.id)}
-                className="absolute top-5 right-4 w-8 bg-gray-200 hover:bg-red-400 transition ease-in-out delay-25 rounded-md text-3xl font-bold text-red-700"
+                className="w-11/12 h-10 mt-2 bg-gray-200 hover:bg-red-400 transition ease-in-out delay-25 rounded-md text-2xl font-bold text-red-700"
               >
                 X
               </button>
-              <img className="mt-2 mx-3 rounded-md" src={device.url} />
             </div>
           ))}
         </div>
@@ -103,6 +95,8 @@ const GrabBag = () => {
               key={device.wikiid}
               url={device.image.standard}
               id={device.wikiid}
+              setBagItems={setBagItems}
+              bagItems={bagItems}
             />
           ))}
       </InfiniteScroll>
