@@ -35,7 +35,7 @@ const DeviceImage = ({ url, id, setBagItems, bagItems }) => {
       />
       <button
         onClick={() => addBagItem(id, url)}
-        className="xl:hidden bg-gray-200 w-11/12 hover:bg-green-400 transition ease-in-out delay-25 rounded-md text-3xl font-bold text-green-700"
+        className="xl:hidden bg-gray-200 w-11/12 xl:hover:bg-green-400 transition ease-in-out delay-25 rounded-md text-3xl font-bold text-green-700"
       >
         +
       </button>

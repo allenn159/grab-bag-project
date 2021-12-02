@@ -46,18 +46,18 @@ const GrabBag = () => {
     getDevices();
   }, [offset]);
 
-  // useEffect(() => {
-  //   const data = localStorage.getItem("bagItems");
-  //   if (data) {
-  //     setBagItems(JSON.parse(data));
-  //   }
-  // }, []);
+  useEffect(() => {
+    const data = localStorage.getItem("bagItems");
+    if (data) {
+      setBagItems(JSON.parse(data));
+    }
+  }, []);
 
-  // useEffect(() => {
-  //   localStorage.setItem("bagItems", JSON.stringify(bagItems));
-  // }, [bagItems]);
+  useEffect(() => {
+    localStorage.setItem("bagItems", JSON.stringify(bagItems));
+  }, [bagItems]);
 
-  if (!devices.length) return <p>Loading...</p>;
+  if (!devices.length) return <p className="text-center">Loading...</p>;
 
   return (
     <>
@@ -67,7 +67,7 @@ const GrabBag = () => {
         <div
           ref={drop}
           className={`whitespace-nowrap text-center w-11/12 h-80 mb-4 rounded-lg bg-white shadow-xl overflow-x-auto ${
-            isOver && "bg-green-300"
+            isOver && "bg-gray-100"
           }`}
         >
           {bagItems.map((device) => (
@@ -75,7 +75,7 @@ const GrabBag = () => {
               <img className="mt-6 mx-3 rounded-md" src={device.url} />
               <button
                 onClick={() => handleRemoveBagItem(device.id)}
-                className="w-11/12 h-10 mt-2 bg-gray-200 hover:bg-red-400 transition ease-in-out delay-25 rounded-md text-2xl font-bold text-red-700"
+                className="w-11/12 h-10 mt-2 bg-gray-200 xl:hover:bg-red-400 transition ease-in-out delay-25 rounded-md text-2xl font-bold text-red-700"
               >
                 X
               </button>
