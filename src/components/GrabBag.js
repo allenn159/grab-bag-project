@@ -24,7 +24,7 @@ const GrabBag = () => {
     }),
   }));
 
-  const handleUpdatePage = () => setOffSet((prev) => prev + 20);
+  const handleUpdatePage = () => setOffSet((prev) => prev + 50);
 
   const handleRemoveBagItem = (deviceId) => {
     const updatedBag = bagItems.filter((bagItem) => bagItem.id !== deviceId);
@@ -33,7 +33,7 @@ const GrabBag = () => {
 
   async function getDevices() {
     const { data, headers } = await axios.get(
-      `https://www.ifixit.com/api/2.0/wikis/CATEGORY?offset=${offset}&limit=20`
+      `https://www.ifixit.com/api/2.0/wikis/CATEGORY?offset=${offset}&limit=50`
     );
     // setDevices((prev) => [...prev, ...data]);
     setDevices((prev) => [...prev, ...data]);
