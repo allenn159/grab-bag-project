@@ -88,6 +88,7 @@ const GrabBag = () => {
         dataLength={devices.length}
         next={handleUpdatePage}
         hasMore={hasMore}
+        loader={<h4>Loading...</h4>}
       >
         {devices.length &&
           devices.map((device) => (
