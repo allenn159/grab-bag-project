@@ -13,7 +13,7 @@ const DeviceImage = ({ url, id, setBagItems, bagItems }) => {
 
   const addBagItem = (itemId, itemUrl) => {
     setBagItems((bag) =>
-      !bag.some((el) => el.id === itemId)
+      !bag.find((el) => el.id === itemId)
         ? [...bag, { id: itemId, url: itemUrl }]
         : bag
     );
@@ -25,7 +25,7 @@ const DeviceImage = ({ url, id, setBagItems, bagItems }) => {
         ref={drag}
         className={`my-2 mx-3 rounded-xl cursor-pointer ${
           isDragging
-            ? bagItems.some((el) => el.id === id)
+            ? bagItems.find((el) => el.id === id)
               ? "border-solid border-4 border-red-600"
               : "border-solid border-4 border-green-400"
             : "border-solid border-4 border-transparent"

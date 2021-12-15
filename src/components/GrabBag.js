@@ -14,7 +14,7 @@ const GrabBag = () => {
     accept: "image",
     drop: (item) =>
       setBagItems((bag) =>
-        !bag.some((el) => el.id === item.id)
+        !bag.find((el) => el.id === item.id)
           ? [...bag, { id: item.id, url: item.url }]
           : bag
       ),
