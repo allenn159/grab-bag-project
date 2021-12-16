@@ -89,16 +89,15 @@ const GrabBag = () => {
         next={handleUpdatePage}
         hasMore={hasMore}
       >
-        {devices.length &&
-          devices.map((device) => (
-            <DeviceImage
-              key={device.wikiid}
-              url={device.image.standard}
-              id={device.wikiid}
-              setBagItems={setBagItems}
-              bagItems={bagItems}
-            />
-          ))}
+        {devices.map((device) => (
+          <DeviceImage
+            key={device.wikiid}
+            url={device.image.standard}
+            id={device.wikiid}
+            setBagItems={setBagItems}
+            bagItems={bagItems}
+          />
+        ))}
       </InfiniteScroll>
     </>
   );
